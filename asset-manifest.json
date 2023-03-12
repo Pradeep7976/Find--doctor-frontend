@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Find--doctor-frontend/static/css/main.3b4c2b61.css",
+    "main.js": "/Find--doctor-frontend/static/js/main.c0834a1a.js",
+    "index.html": "/Find--doctor-frontend/index.html",
+    "main.3b4c2b61.css.map": "/Find--doctor-frontend/static/css/main.3b4c2b61.css.map",
+    "main.c0834a1a.js.map": "/Find--doctor-frontend/static/js/main.c0834a1a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3b4c2b61.css",
+    "static/js/main.c0834a1a.js"
+  ]
+}
