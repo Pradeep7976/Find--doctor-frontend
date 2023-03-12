@@ -8,13 +8,16 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import Loading from "../../components/Loading/Loading";
 
 import axios from "axios";
-import ReactLoading from "react-loading";
 
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
-let Util = () => {
+let Util2 = () => {
+  return <Loading />;
+};
+let Util1 = () => {
   let navigate = useNavigate();
   function nav() {
     navigate("/doctors");
@@ -98,17 +101,16 @@ function Home() {
       .then((response) => {
         if (!response.data.auth) {
           navigate("/login");
+        } else {
+          setload(response.data.auth);
+          if (load) {
+            Util2 = Util1;
+          }
         }
-      })
-      .then(() => {
-        setload("");
       });
-    // eslint-disable-next-line
-    if (!load) {
-      Util = <ReactLoading height={"20%"} width={"20%"} />;
-    }
+
     // eslint-disable-next-line
   }, []);
-  return <>{Util}</>;
+  return <>{<Util2 />}</>;
 }
 export default Home;
