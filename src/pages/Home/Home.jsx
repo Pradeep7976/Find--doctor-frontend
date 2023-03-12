@@ -7,14 +7,14 @@ import {
   useBreakpointValue,
   Heading,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import axios from "axios";
+import ReactLoading from "react-loading";
 
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
-function Home() {
-  const port = "https://famous-puce-raven.cyclic.app";
+let Util = () => {
   let navigate = useNavigate();
   function nav() {
     navigate("/doctors");
@@ -22,20 +22,6 @@ function Home() {
   function addnav() {
     navigate("/docadd");
   }
-
-  useEffect(() => {
-    axios
-      .get(port + "/isUserAuth", {
-        headers: { "x-access-token": localStorage.getItem("token") },
-      })
-      .then((response) => {
-        if (!response.data.auth) {
-          navigate("/login");
-        }
-      });
-    // eslint-disable-next-line
-  }, []);
-
   return (
     <div>
       <Flex
@@ -96,5 +82,33 @@ function Home() {
       </Flex>
     </div>
   );
+};
+function noload() {
+  return <div>Loading bro</div>;
+}
+function Home() {
+  const [load, setload] = useState(null);
+  const port = "https://famous-puce-raven.cyclic.app";
+  let navigate = useNavigate();
+  useEffect(() => {
+    axios
+      .get(port + "/isUserAuth", {
+        headers: { "x-access-token": localStorage.getItem("token") },
+      })
+      .then((response) => {
+        if (!response.data.auth) {
+          navigate("/login");
+        }
+      })
+      .then(() => {
+        setload("");
+      });
+    // eslint-disable-next-line
+    if (!load) {
+      Util = <ReactLoading height={"20%"} width={"20%"} />;
+    }
+    // eslint-disable-next-line
+  }, []);
+  return <>{Util}</>;
 }
 export default Home;

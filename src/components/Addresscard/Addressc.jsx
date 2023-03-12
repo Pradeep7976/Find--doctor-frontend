@@ -1,16 +1,10 @@
 import {
-  Avatar,
-  Box,
   chakra,
-  Container,
   Flex,
-  Icon,
-  SimpleGrid,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 function TestimonialCard(props) {
-  const { name, role, content, avatar, index } = props;
   return (
     <Flex
       boxShadow={"lg"}
