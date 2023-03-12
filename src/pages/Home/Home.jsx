@@ -90,7 +90,7 @@ function noload() {
   return <div>Loading bro</div>;
 }
 function Home() {
-  const [load, setload] = useState(null);
+  const [load, setload] = useState(false);
   const port = "https://famous-puce-raven.cyclic.app";
   let navigate = useNavigate();
   useEffect(() => {
@@ -101,16 +101,14 @@ function Home() {
       .then((response) => {
         if (!response.data.auth) {
           navigate("/login");
+          // setload(response.data.auth);
         } else {
-          setload(response.data.auth);
-          if (load) {
-            Util2 = Util1;
-          }
+          setload(true);
         }
       });
 
     // eslint-disable-next-line
   }, []);
-  return <>{<Util2 />}</>;
+  return <>{load ? <Util1 /> : <Util2 />}</>;
 }
 export default Home;
